@@ -1,13 +1,12 @@
-import { ServiceBroker } from "moleculer";
 import UserService from "./services/user.service.js";
 import EmailService from "./services/email.service.js";
-
-const broker = new ServiceBroker();
+import AuthService from "./services/auth.service.js";
 
 async function startApp() {
   //Start services
   await UserService.start();
   await EmailService.start();
+  await AuthService.start();
   try {
     //Simulate user creation
     const newUser = await UserService.call("user.createUser", {
@@ -24,10 +23,18 @@ async function startApp() {
       content: "Thanks for signing up!",
     });
     console.log(emailResult);
+    //Simulate auth flow
+    const authResult = await AuthService.call("auth.authUser", {
+      name: newUser.name,
+      password: "password",
+    });
+    console.log("Auth Result:", authResult);
   } catch (err) {
     console.log(err);
   } finally {
     await UserService.stop();
+    await EmailService.stop();
+    await AuthService.stop();
   }
 }
 

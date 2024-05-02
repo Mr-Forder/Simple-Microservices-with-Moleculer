@@ -7,7 +7,9 @@ A simple mocked up set of microservices, using Moleculer - a Progressive microse
 Yeah, all these services are just mocks - It's just a playground to much about with Microservice architecture.
 For example, our user service would normally be interacting with a database, here I've just hard coded some dummy users 😂
 
-I've created 3 mock microservices, one for handling users, one for sending emails, and one for auth. Play with them
+I've created 3 mock microservices, one for handling users, one for sending emails, and one for auth. Play with them.
+
+As with a large scale microservice, each service works independantly of the other. Break one service, and it won't affect any others.
 
 ## To get started
 
